@@ -1,5 +1,3 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
 ## 脚手架
 
 这个项目是使用Create React App创建的。
