@@ -10,6 +10,8 @@
 
 在开发环境中使用npm start来启动项目，在浏览器中打开输入[http://localhost:3000](http://localhost:3000)来查看
 
+效果地址：[http://imoocms.51purse.com/#/home](http://imoocms.51purse.com/#/home)
+
 ### `编译程序`
 
 使用npm run build将代码编译成可运行的静态文件

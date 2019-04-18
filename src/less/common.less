@@ -1,11 +1,19 @@
+@import "./default.less";
+body{
+  font-family: '"Helvetica Neue For Number", "PingFang SC Light", "Heiti SC", "San Francisco", "Helvetica", Arial, sans-serif';
+}
 .container{
   display: flex;
+  color: @colorH;
+  font-size: 14px;
   .nav-left{
-    background-color: red;
-    min-width: 300px;
+    min-width: 270px;
     height: calc(100vh);
+    background-color: @colorR;
   }
   .main{
     flex: 1;
+    height: calc(100vh);
+    background-color: @colorL;
   }
 }
