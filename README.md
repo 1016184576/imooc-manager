@@ -15,3 +15,8 @@
 ### `编译程序`
 
 使用npm run build将代码编译成可运行的静态文件
+
+
+### `项目演示地址`
+
+[http://imoocms.51purse.com](http://imoocms.51purse.com)

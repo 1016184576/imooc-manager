@@ -1,85 +1,85 @@
 const menuList = [
     {
         title: '首页',
-        key: '/home'
+        key: '/admin/home'
     },
     {
         title: 'UI',
-        key: '/ui',
+        key: '/admin/ui',
         children: [
             {
                 title: '按钮',
-                key: '/ui/buttons',
+                key: '/admin/ui/buttons',
             },
             {
                 title: '弹框',
-                key: '/ui/modals',
+                key: '/admin/ui/modals',
             },
             {
                 title: 'Loading',
-                key: '/ui/loadings',
+                key: '/admin/ui/loadings',
             },
             {
                 title: '通知提醒',
-                key: '/ui/notification',
+                key: '/admin/ui/notification',
             },
             {
                 title: '全局Message',
-                key: '/ui/messages',
+                key: '/admin/ui/messages',
             },
             {
                 title: 'Tab页签',
-                key: '/ui/tabs',
+                key: '/admin/ui/tabs',
             },
             {
                 title: '图片画廊',
-                key: '/ui/gallery',
+                key: '/admin/ui/gallery',
             },
             {
                 title: '轮播图',
-                key: '/ui/carousel',
+                key: '/admin/ui/carousel',
             }
         ]
     },
     {
         title: '表单',
-        key: '/form',
+        key: '/admin/form',
         children: [
             {
                 title: '登录',
-                key: '/form/login',
+                key: '/admin/form/login',
             },
             {
                 title: '注册',
-                key: '/form/reg',
+                key: '/admin/form/reg',
             }
         ]
     },
     {
         title: '表格',
-        key: '/table',
+        key: '/admin/table',
         children: [
             {
                 title: '基础表格',
-                key: '/table/basic',
+                key: '/admin/table/basic',
             },
             {
                 title: '高级表格',
-                key: '/table/high',
+                key: '/admin/table/high',
             }
         ]
     },
     {
         title: '富文本',
-        key: '/rich'
+        key: '/admin/rich'
     },
     {
         title: '城市管理',
-        key: '/city'
+        key: '/admin/city'
     },
     {
         title: '订单管理',
-        key: '/order',
+        key: '/admin/order',
         btnList: [
             {
                 title: '订单详情',
@@ -93,33 +93,36 @@ const menuList = [
     },
     {
         title: '员工管理',
-        key: '/user'
+        key: '/admin/user'
     },
     {
         title: '车辆地图',
-        key: '/bikeMap'
+        key: '/admin/bikeMap'
     },
     {
         title: '图标',
-        key: '/charts',
+        key: '/admin/charts',
         children: [
             {
                 title: '柱形图',
-                key: '/charts/bar'
+                key: '/admin/charts/bar'
             },
             {
                 title: '饼图',
-                key: '/charts/pie'
+                key: '/admin/charts/pie'
             },
             {
                 title: '折线图',
-                key: '/charts/line'
+                key: '/admin/charts/line'
             },
         ]
     },
     {
         title: '权限设置',
-        key: '/permission'
+        key: '/admin/permission'
+    },{
+        title: '登陆',
+        key: '/login'
     },
 ];
 export default menuList;

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-/* import { Link } from "react-router-dom"; */
+import { Link } from "react-router-dom";
 import menuList from "../../config/menuConfig";
-import { Menu, Icon } from 'antd';
+import { Menu } from 'antd';
 import './index.less';
 
 const { SubMenu } = Menu;
@@ -11,7 +11,7 @@ export default class NavLeft extends Component {
     this.state = {
       nodeTreeList: []
     }
-  }
+  } 
   componentWillMount(){
     let nodeTreeList = this.rednerMenu(menuList);
     this.setState({
@@ -31,7 +31,7 @@ export default class NavLeft extends Component {
       }
       return (
         <Menu.Item key={item.key}>
-          <a href={item.key}>{item.title}</a>
+          <Link to={item.key}>{item.title}</Link>
         </Menu.Item>
       )
     })

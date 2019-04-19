@@ -5,23 +5,34 @@ import Axios from '../../axios/axios';
 import "./index.less";
 
 export default class Header extends Component {
-  state = {
-    username:'正完美先森',
-    sysTime:'',
-    dayPictureUrl:'',
-    weather:'',
+  
+  constructor(props){
+    super(props)
+    this.state = {
+      username:'正完美先森',
+      sysTime:'',
+      dayPictureUrl:'',
+      weather:'',
+      timer:null
+    };
   }
   componentWillMount(){
     this.getWeatherApiData();
-    setInterval(()=>{
+    
+    let interval = setInterval(()=>{
       let nowTime = new Date().getTime();
       let sysTime = Utils.formatDate(nowTime);
       this.setState({
         sysTime
       })
     },1000)
+    this.setState({
+      timer: interval
+    })
   }
-
+  componentWillUnmount(){
+    clearInterval(this.state.timer)
+  }
   //获取百度API天气数据
   getWeatherApiData(){
     let city = '上海';

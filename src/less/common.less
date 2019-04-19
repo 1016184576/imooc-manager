@@ -1,6 +1,7 @@
 @import "./default.less";
 body{
   font-family: '"Helvetica Neue For Number", "PingFang SC Light", "Heiti SC", "San Francisco", "Helvetica", Arial, sans-serif';
+  background-color: @colorL;
 }
 .container{
   display: flex;
@@ -14,6 +15,10 @@ body{
   .main{
     flex: 1;
     height: calc(100vh);
-    background-color: @colorL;
+    
+    overflow: auto;
+    .content{
+      padding: 20px;
+    }
   }
 }
