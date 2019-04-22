@@ -33,11 +33,11 @@ const menuList = [
             },
             {
                 title: '图片画廊',
-                key: '/admin/ui/gallery',
+                key: '/admin/ui/gallerys',
             },
             {
                 title: '轮播图',
-                key: '/admin/ui/carousel',
+                key: '/admin/ui/carousels',
             }
         ]
     },
@@ -51,7 +51,7 @@ const menuList = [
             },
             {
                 title: '注册',
-                key: '/admin/form/reg',
+                key: '/admin/form/register',
             }
         ]
     },
