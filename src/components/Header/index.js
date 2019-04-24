@@ -55,7 +55,7 @@ export default class Header extends Component {
         <Row className="header-top">
           <Col span={24}>
             <span>欢迎，{this.state.username}</span>
-            <a href="#">退出</a>
+            <a href="/">退出</a>
           </Col>
         </Row>
         <Row className="breadcrumb">

@@ -1,5 +1,5 @@
 export default {
-  formatDate: function ( time, fmt) {
+  formatDate( time, fmt) {
     if(!time) return '';
     if(!fmt) fmt = "yyyy-MM-dd hh:mm:ss";
     let date = new Date(time)
@@ -16,7 +16,22 @@ export default {
       fmt = fmt.replace(RegExp.$1, (date.getFullYear() + "").substr(4 - RegExp.$1.length));
     for (var k in o)
       if (new RegExp("(" + k + ")").test(fmt))
-        fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+        fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
     return fmt;
+  },
+  pagination(data,callback){
+    console.log(data);
+    return {
+      current: data.current,
+      pageSize: data.pageSize,
+      total: data.total,
+      showQuickJumper:true,
+      onChange(page, pageSize){
+        callback(page, pageSize);
+      },
+      showTotal(total){
+        return `共${total}条`
+      }
+    }
   }
 }

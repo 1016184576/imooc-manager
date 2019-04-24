@@ -1,6 +1,6 @@
 
 import React, { Component } from "react";
-import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import App from '../app';
 import Login from '../views/Login';
 import NotFound from '../views/NotFound';
@@ -16,6 +16,8 @@ import Gallerys from '../views/UI/Gallerys';
 import Carousels from '../views/UI/Carousels';
 import FormLogin from '../views/Form/FormLogin';
 import FormRegister from '../views/Form/FormRegister';
+import BasicTable from '../views/Table/BasicTable';
+import HighTable from '../views/Table/HighTable';
 
 export default class Routers extends Component {
   render() {
@@ -24,20 +26,22 @@ export default class Routers extends Component {
         <App>
           <Switch>
             <Route path="/login" component={Login} />
-            <Route path="/admin" render={()=>
+            <Route path="/admin" render={({match})=>
               <Admin>
                 <Switch>
-                  <Route path="/admin/home" component={Home} />
-                  <Route path="/admin/ui/buttons" component={Buttons} />
-                  <Route path="/admin/ui/modals" component={Modals} />
-                  <Route path="/admin/ui/loadings" component={Loadings} />
-                  <Route path="/admin/ui/notification" component={Notifications} />
-                  <Route path="/admin/ui/messages" component={Messages} />
-                  <Route path="/admin/ui/tabs" component={Tabs} />
-                  <Route path="/admin/ui/gallerys" component={Gallerys} />
-                  <Route path="/admin/ui/carousels" component={Carousels} />
-                  <Route path="/admin/form/login" component={FormLogin} />
-                  <Route path="/admin/form/register" component={FormRegister} />
+                  <Route path={`${match.path}/home`} component={Home} />
+                  <Route path={`${match.path}/ui/buttons`} component={Buttons} />
+                  <Route path={`${match.path}/ui/modals`} component={Modals} />
+                  <Route path={`${match.path}/ui/loadings`} component={Loadings} />
+                  <Route path={`${match.path}/ui/notification`} component={Notifications} />
+                  <Route path={`${match.path}/ui/messages`} component={Messages} />
+                  <Route path={`${match.path}/ui/tabs`} component={Tabs} />
+                  <Route path={`${match.path}/ui/gallerys`} component={Gallerys} />
+                  <Route path={`${match.path}/ui/carousels`} component={Carousels} />
+                  <Route path={`${match.path}/form/login`} component={FormLogin} />
+                  <Route path={`${match.path}/form/register`} component={FormRegister} />
+                  <Route path={`${match.path}/table/basic`} component={BasicTable} />
+                  <Route path={`${match.path}/table/high`} component={HighTable} />
                   <Route component={NotFound} />
                 </Switch>
               </Admin>

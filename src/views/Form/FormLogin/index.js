@@ -80,12 +80,11 @@ class FormLogin extends React.Component{
                   <Checkbox>记住密码</Checkbox>
                 )
               }
-              <a href="#" style={{float:'right'}}>忘记密码</a>
+              <a href="/admin/form/login" style={{float:'right'}}>忘记密码</a>
             </Form.Item>
             <Form.Item>
               <Button type="primary"  htmlType="submit" style={{width:'100%'}}>登陆</Button>
             </Form.Item>
-
           </Form>
         </Card>
       </div>

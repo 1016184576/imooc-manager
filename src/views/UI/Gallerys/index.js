@@ -86,7 +86,7 @@ export default class Gallerys extends React.Component {
           }}
           footer={null}
         >
-          <img src={this.state.currentImgSrc} style={{width:'100%'}}/>
+          <img src={this.state.currentImgSrc} alt="" style={{width:'100%'}}/>
         </Modal>
       </div>
     )
