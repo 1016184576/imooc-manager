@@ -105,10 +105,10 @@ export default class BasicTable extends React.Component {
     return {
       // 点击行
       onClick: (event) => {
-        Modal.info({
+       /*  Modal.info({
           title: '提示',
           content: `用户名是:${record.userName},性别:${record.sex},爱好:${record.interest}`
-        })
+        }) */
         this.setState({
           selectedRowKeys: [record.id]
         })

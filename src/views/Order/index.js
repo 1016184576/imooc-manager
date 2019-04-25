@@ -3,7 +3,6 @@ import { Card, Form, Button, Message, DatePicker, Select, Row, Col, Table, Modal
 import { cityConfig, orderStatusConfig } from '../../config/fieldRenderConfig';
 import Utils from '../../utils/utils';
 import axios from '../../axios/axios';
-import moment from 'moment';
 import "./index.less";
 
 const { Option } = Select;
@@ -17,7 +16,9 @@ export default class Order extends React.Component {
     }
     this.state = {
       pagination:{},
-      selectedRowKeys:[]
+      selectedRowKeys:[],
+      selectedRow:{},
+      visible: false
     }
   }
 
@@ -59,12 +60,23 @@ export default class Order extends React.Component {
     this.searchForm.props.form.resetFields()
   }
 
-  //结束订单方法
+  //结束订单弹出方法
   handleEndOrder = () => {
-    if(this.state.selectedRowKeys.length >　0){
-      /* Message.success('')
-      this.getOrderList() */
-    }else{
+    if (this.state.selectedRowKeys.length >　0){
+      if (this.state.selectedRow.orderStatus === 3) {
+        Modal.info({
+          title: "温馨提示",
+          content: "该订单行程已结束",
+          cancelText: '',
+          okText: '关闭',
+          width: 320
+        })
+      }else{
+        this.setState({
+          visible: true
+        })
+      } 
+    } else{
       Modal.info({
         title:"温馨提示",
         content:"请选择要结束的订单",
@@ -75,6 +87,15 @@ export default class Order extends React.Component {
     }
   }
 
+  //结束订单方法
+  handleSubmitEndOrder = () => {
+    this.setState({
+      visible: false
+    })
+    Message.success("订单已结束");
+    this.getOrderList();
+  }
+
   handleOrderDetail = () => {
 
   }
@@ -83,8 +104,10 @@ export default class Order extends React.Component {
     return {
       // 点击行
       onClick: (event) => {
+        console.log(record)
         this.setState({
-          selectedRowKeys: [record.orderNo]
+          selectedRowKeys: [record.orderNo],
+          selectedRow: record
         })
       }
     }
@@ -155,6 +178,8 @@ export default class Order extends React.Component {
       selectedRowKeys: this.state.selectedRowKeys,
       type: 'radio'
     };
+    const labelCol = { xs: 24, sm: 6 },
+      wrapperCol = { xs: 24, sm: 12 };
     return (
       <div className="order-warp">
         <Card className="card">
@@ -196,6 +221,37 @@ export default class Order extends React.Component {
           >
           </Table>
         </div>
+        <Modal
+          visible={this.state.visible}
+          title="结束订单"
+          okText="结束订单"
+          cancelText="取消"
+          onOk={this.handleSubmitEndOrder}
+          onCancel={()=>{
+            this.setState({
+              visible: false
+            })
+          }}
+        >
+          <Form
+            labelCol={labelCol}
+            wrapperCol={wrapperCol}
+          >
+            <Form.Item label="车辆编号">
+              {this.state.selectedRow.carNo}
+            </Form.Item>
+            <Form.Item label="剩余电量">
+              100%
+            </Form.Item>
+            <Form.Item label="行程开始时间">
+              {this.state.selectedRow.startDate}
+            </Form.Item>
+            <Form.Item label="当前位置">
+              北京市海淀区奥林匹克公园
+            </Form.Item>
+          </Form>
+          
+        </Modal>
       </div>
     )
   }
@@ -225,19 +281,15 @@ class HeaderForm extends React.Component {
         </Form.Item>
         <Form.Item>
           {
-            getFieldDecorator('startdate', {
-              initialValue: moment(new Date())
-            })(
-              <DatePicker />
+            getFieldDecorator('startdate')(
+              <DatePicker showTime placeholder="请选择开始时间" />
             )
           }
         </Form.Item>
         <Form.Item>
           {
-            getFieldDecorator('enddate', {
-              initialValue: moment(new Date())
-            })(
-              <DatePicker />
+            getFieldDecorator('enddate')(
+              <DatePicker showTime placeholder="请选择结束时间" />
             )
           }
         </Form.Item>
