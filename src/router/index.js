@@ -18,6 +18,8 @@ import FormLogin from '../views/Form/FormLogin';
 import FormRegister from '../views/Form/FormRegister';
 import BasicTable from '../views/Table/BasicTable';
 import HighTable from '../views/Table/HighTable';
+import City from '../views/City';
+import Order from '../views/Order';
 
 export default class Routers extends Component {
   render() {
@@ -42,6 +44,8 @@ export default class Routers extends Component {
                   <Route path={`${match.path}/form/register`} component={FormRegister} />
                   <Route path={`${match.path}/table/basic`} component={BasicTable} />
                   <Route path={`${match.path}/table/high`} component={HighTable} />
+                  <Route path={`${match.path}/city`} component={City} />
+                  <Route path={`${match.path}/order`} component={Order}/>
                   <Route component={NotFound} />
                 </Switch>
               </Admin>

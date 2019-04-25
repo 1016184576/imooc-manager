@@ -27,3 +27,37 @@ export const isMarryConfig = {
   "1": '已婚',
   "0": '未婚'
 }
+
+//城市配置
+export const cityConfig = {
+  "1": "北京",
+  "2": "上海",
+  "3": "深圳"
+}
+
+//用车模式配置
+export const carModeConfig = {
+  "1": "指定停车点模式",
+  "2": "禁停区模式",
+}
+
+//运营模式配置
+export const opModeConfig = {
+  "1": "自营",
+  "2": "加盟",
+}
+
+//加盟商授权状态配置
+export const authConfig = {
+  "1": "已授权",
+  "2": "未授权",
+}
+
+//订单状态配置
+export const orderStatusConfig = {
+  "1": "进行中",
+  "2": "进行中(临时锁车)",
+  "3": "结束行程"
+}
+
+

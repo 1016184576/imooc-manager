@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Table, Modal, Button, Message, Pagination } from "antd";
+import { Card, Table, Modal, Button, Message } from "antd";
 import "./index.less";
 
 import axios from '../../../axios/axios';

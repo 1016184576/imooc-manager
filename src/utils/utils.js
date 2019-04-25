@@ -20,7 +20,6 @@ export default {
     return fmt;
   },
   pagination(data,callback){
-    console.log(data);
     return {
       current: data.current,
       pageSize: data.pageSize,
