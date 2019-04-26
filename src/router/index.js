@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import App from '../App';
+import Common from '../Common';
 import Login from '../views/Login';
 import NotFound from '../views/NotFound';
 import Home from '../views/Home';
@@ -20,6 +21,7 @@ import BasicTable from '../views/Table/BasicTable';
 import HighTable from '../views/Table/HighTable';
 import City from '../views/City';
 import Order from '../views/Order';
+
 
 export default class Routers extends Component {
   render() {
@@ -50,7 +52,14 @@ export default class Routers extends Component {
                 </Switch>
               </Admin>
             } />
-            <Route path="/order/detail"  component={Login} />
+            <Route path="/common"  render={({match})=>
+              <Common>
+                <Switch>
+                  <Route path={`${match.path}/order/detail:id`} component={HighTable} />
+                  <Route component={NotFound} />
+                </Switch>
+              </Common>
+            } />
             <Route component={NotFound} />
           </Switch>
         </App>

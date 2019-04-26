@@ -97,14 +97,23 @@ export default class Order extends React.Component {
   }
 
   handleOrderDetail = () => {
-
+    if (this.state.selectedRowKeys.length >　0){
+      window.open(`/common/order/detail/${this.state.selectedRow.orderNo}`,"_blank");
+    } else{
+      Modal.info({
+        title:"温馨提示",
+        content:"请先选择订单",
+        cancelText:'',
+        okText:'关闭',
+        width: 320
+      })
+    }
   }
 
   onRow = (record) => {
     return {
       // 点击行
       onClick: (event) => {
-        console.log(record)
         this.setState({
           selectedRowKeys: [record.orderNo],
           selectedRow: record
@@ -259,6 +268,9 @@ export default class Order extends React.Component {
 
 //头部的搜索表单组件
 class HeaderForm extends React.Component {
+  geta(){
+    console.log(1111)
+  }
   render(){
     const { getFieldDecorator } = this.props.form;
     return (
