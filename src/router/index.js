@@ -21,6 +21,8 @@ import BasicTable from '../views/Table/BasicTable';
 import HighTable from '../views/Table/HighTable';
 import City from '../views/City';
 import Order from '../views/Order';
+import OrderDetail from '../views/Order/Detail';
+import User from '../views/User';
 
 
 export default class Routers extends Component {
@@ -48,6 +50,7 @@ export default class Routers extends Component {
                   <Route path={`${match.path}/table/high`} component={HighTable} />
                   <Route path={`${match.path}/city`} component={City} />
                   <Route path={`${match.path}/order`} component={Order}/>
+                  <Route path={`${match.path}/user`} component={User}/>
                   <Route component={NotFound} />
                 </Switch>
               </Admin>
@@ -55,7 +58,7 @@ export default class Routers extends Component {
             <Route path="/common"  render={({match})=>
               <Common>
                 <Switch>
-                  <Route path={`${match.path}/order/detail:id`} component={HighTable} />
+                  <Route path={`${match.path}/order/detail/:id`} component={OrderDetail} />
                   <Route component={NotFound} />
                 </Switch>
               </Common>

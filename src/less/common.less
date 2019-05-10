@@ -4,6 +4,17 @@ body{
   font-family: '"Helvetica Neue For Number", "PingFang SC Light", "Heiti SC", "San Francisco", "Helvetica", Arial, sans-serif';
   background-color: @colorL;
 }
+ul,li{
+  list-style: none;
+}
+.clearfix{
+  &::after{
+    content: '';
+    display: block;
+    zoom: 1;
+    clear: both;
+  }
+}
 .container{
   display: flex;
   color: @colorH;
@@ -16,11 +27,7 @@ body{
   .main{
     flex: 1;
     height: calc(100vh);
-    
     overflow: auto;
-    .content{
-      padding: 20px;
-    }
   }
   .contend-warp{
     background-color: #fff;
@@ -29,4 +36,9 @@ body{
       border-bottom: 1px solid #e8e8e8;
     }
   }
+}
+
+.content{
+  padding: 20px;
+  position: relative;
 }

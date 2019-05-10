@@ -1,3 +1,6 @@
+import React from 'react';
+import { Select } from "antd";
+const Option = Select.Option;
 export default {
   formatDate( time, fmt) {
     if(!time) return '';
@@ -32,5 +35,14 @@ export default {
         return `共${total}条`
       }
     }
+  },
+  getOptionList(data){
+    if(!data || data.length === 0)return [];
+    let optionList = [];
+    data.map((item)=>{
+      optionList.push(<Option key={item.id} value={item.id}>{item.text}</Option>)
+      return item;
+    })
+    return optionList;
   }
 }

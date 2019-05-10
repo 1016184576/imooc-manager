@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, Table, Modal, Button, Message } from "antd";
 import "./index.less";
 
-import axios from '../../../axios/axios';
+import { getFixedHeaderData, getFixedColumnData } from '../../../api/table';
 import { sexConfig, statusConfig, interestConfig, isMarryConfig } from '../../../config/fieldRenderConfig';
 
 
@@ -22,9 +22,9 @@ export default class HighTable extends React.Component {
     this.getFixedColumntList();
   }
 
+  //获取固定头部类型列表数据
   getFixedHeadertList() {
-    axios.ajax({
-      url: '/table/high/getFixedHeadertList',
+    getFixedHeaderData({
       params: this.params
     }).then(res => {
       this.setState({
@@ -33,9 +33,9 @@ export default class HighTable extends React.Component {
     })
   }
 
+  //获取固定列类型列表数据
   getFixedColumntList() {
-    axios.ajax({
-      url: '/table/high/getFixedColumntList',
+    getFixedColumnData({
       params: this.params
     }).then(res => {
       this.setState({

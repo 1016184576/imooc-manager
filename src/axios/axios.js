@@ -1,8 +1,10 @@
 import JSONP from 'jsonp';
 import axios from 'axios';
 import { Modal } from 'antd';
+import { isMock } from '../config';
 
 export default class Axios {
+
   static jsonp(options) {
     return new Promise((resolve, reject) => {
       JSONP(options.url, {
@@ -22,7 +24,7 @@ export default class Axios {
   }
 
   static ajax(options) {
-    const baseURL = 'https://www.easy-mock.com/mock/5cbeb11f3c65af2ab66ab05b/api';
+    const baseURL = isMock ? 'https://www.easy-mock.com/mock/5cbeb11f3c65af2ab66ab05b/api' : '';
     const loadingDom = document.getElementById('ajaxLoading');
     options.isShowLoading !== false && (loadingDom.style.display = 'block');
     return new Promise((resolve, reject) => {
@@ -51,4 +53,5 @@ export default class Axios {
       })
     })
   }
+  
 }

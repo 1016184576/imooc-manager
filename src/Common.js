@@ -10,7 +10,7 @@ export default class Common extends Component {
         <Row className="container">
           <Header menuType="second"/>
         </Row>
-        <Row className="content">
+        <Row className="content" style={{marginTop:"55px"}}>
           {this.props.children}
         </Row>
       </div>

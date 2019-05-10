@@ -1,8 +1,9 @@
 import React from 'react';
-import { Card, Form, Button, Message, Radio, Select, Row, Col, Table, Modal } from "antd";
+import { Card, Form, Button, Message, Radio, Select, Table, Modal } from "antd";
 import { cityConfig, carModeConfig, opModeConfig, authConfig } from '../../config/fieldRenderConfig';
 import Utils from '../../utils/utils';
-import axios from '../../axios/axios';
+import { getCityList } from './../../api/city';
+import FilterForm from '../../components/FilterForm';
 import "./index.less";
 
 const { Option } = Select;
@@ -10,13 +11,74 @@ const { Option } = Select;
 export default class City extends React.Component {
   constructor(props) {
     super(props)
-    this.params = {
-      page: 1,
-      pageSize: 10
-    }
     this.state = {
       pagination:{}
     }
+  }
+
+  params = {
+    page: 1,
+    pageSize: 10
+  }
+
+  formList = [{
+    type: 'SELECT',
+    label: '城市',
+    width: 100,
+    placeholder: '请选择',
+    field: 'city',
+    initialValue: '0',
+    list: Object.keys(cityConfig).map((key) => {
+      return {
+        id: key,
+        text: cityConfig[key]
+      }
+    })
+  },{
+    type: 'SELECT',
+    label: '用车模式',
+    width: 150,
+    placeholder: '请选择',
+    field: 'carMode',
+    initialValue: '0',
+    list: Object.keys(carModeConfig).map((key) => {
+      return {
+        id: key,
+        text: carModeConfig[key]
+      }
+    })
+  },{
+    type: 'SELECT',
+    label: '运营模式',
+    width: 100,
+    placeholder: '请选择',
+    field: 'opMode',
+    initialValue: '0',
+    list: Object.keys(opModeConfig).map((key) => {
+      return {
+        id: key,
+        text: opModeConfig[key]
+      }
+    })
+  } , {
+    type: 'SELECT',
+    label: '加盟商授权状态',
+    width: 100,
+    placeholder: '请选择',
+    field: 'auth',
+    initialValue: '0',
+    list: Object.keys(authConfig).map((key) => {
+      return {
+        id: key,
+        text: authConfig[key]
+      }
+    })
+  }]
+
+  //开通城市提交请求
+  handleQuerySubmit = (fieldValues) => {
+    console.log(fieldValues)
+    this.getOpenCityList();
   }
 
   componentWillMount(){
@@ -33,8 +95,7 @@ export default class City extends React.Component {
 
   //获取开通城市列表数据
   getOpenCityList = () => {
-    axios.ajax({
-      url: '/open_city_list',
+    getCityList({
       params: this.params
     }).then(res => {
       this.setState({
@@ -48,11 +109,6 @@ export default class City extends React.Component {
         })
       })
     })
-  }
-
-  //重置搜索表单
-  resetSearchForm = () => {
-    this.searchForm.props.form.resetFields()
   }
 
   render() {
@@ -107,23 +163,7 @@ export default class City extends React.Component {
     return (
       <div className="city-warp">
         <Card className="card">
-          <Row>
-            <Col xl={12} lg={24}>
-              <SearchForm wrappedComponentRef={(searchForm)=>{
-                this.searchForm = searchForm;
-              }}/>
-            </Col>
-            <Col xl={5} lg={24}>
-              <Form layout="inline">
-                <Form.Item>
-                  <Button type="primary" onClick={this.getOpenCityList}>查询</Button>
-                </Form.Item>
-                <Form.Item>
-                  <Button onClick={this.resetSearchForm}>重置</Button>
-                </Form.Item>
-              </Form>
-            </Col>
-          </Row>
+          <FilterForm formList={this.formList} handleSubmit={this.handleQuerySubmit} />
         </Card>
         <Card>
           <Button type="primary" onClick={()=>{
@@ -164,84 +204,6 @@ export default class City extends React.Component {
     )
   }
 }
-
-//头部的搜索表单组件
-class HeaderForm extends React.Component {
-  render(){
-    const { getFieldDecorator } = this.props.form;
-    return (
-      <Form layout="inline">
-        <Form.Item label="城市">
-          {
-            getFieldDecorator('city', {
-              initialValue: '0'
-            })(
-              <Select style={{width:80}}>
-                <Option value="0">全部</Option>
-                {
-                  Object.keys(cityConfig).map((key)=>{
-                    return <Option key={key} value={key}>{cityConfig[key]}</Option>
-                  })
-                }
-              </Select>
-            )
-          }
-        </Form.Item>
-        <Form.Item label="用车模式">
-          {
-            getFieldDecorator('carMode', {
-              initialValue: '0'
-            })(
-              <Select style={{width:140}}>
-                <Option value="0">全部</Option>
-                {
-                  Object.keys(carModeConfig).map((key)=>{
-                    return <Option key={key} value={key}>{carModeConfig[key]}</Option>
-                  })
-                }
-              </Select>
-            )
-          }
-        </Form.Item>
-        <Form.Item label="营运模式">
-          {
-            getFieldDecorator('opMode', {
-              initialValue: '0'
-            })(
-              <Select style={{width:80}}>
-                <Option value="0">全部</Option>
-                {
-                  Object.keys(opModeConfig).map((key)=>{
-                    return <Option key={key} value={key}>{opModeConfig[key]}</Option>
-                  })
-                }
-              </Select>
-            )
-          }
-        </Form.Item>
-        <Form.Item label="加盟商授权状态">
-          {
-            getFieldDecorator('auth', {
-              initialValue: '0'
-            })(
-              <Select style={{width:80}}>
-                <Option value="0">全部</Option>
-                {
-                  Object.keys(authConfig).map((key)=>{
-                    return <Option key={key} value={key}>{authConfig[key]}</Option>
-                  })
-                }
-              </Select>
-            )
-          }
-        </Form.Item>
-      </Form>
-    )
-  }
-}
-
-const SearchForm = Form.create({ name: 'searchForm' })(HeaderForm);
-
 
 //弹出框表单组件
 class OpenForm extends React.Component{

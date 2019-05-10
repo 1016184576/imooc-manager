@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, Table, Modal, Button, Message } from "antd";
 import "./index.less";
 
-import axios from '../../../axios/axios';
+import { getBasicList } from '../../../api/table';
 import { sexConfig, statusConfig, interestConfig, isMarryConfig } from '../../../config/fieldRenderConfig';
 
 import Utils from '../../../utils/utils';
@@ -82,8 +82,7 @@ export default class BasicTable extends React.Component {
   }
 
   getList() {
-    axios.ajax({
-      url: '/table/basic/getList',
+    getBasicList({
       params: this.params
     }).then(res => {
       this.setState({
