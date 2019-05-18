@@ -200,7 +200,6 @@ class FormRegister extends React.Component {
             >
               <Button type="primary" htmlType="submit">登陆</Button>
             </Form.Item>
-
           </Form>
         </Card>
       </div>

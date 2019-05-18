@@ -31,6 +31,8 @@ export default class OrderDetail extends React.Component {
     })
   }
 
+  
+
   //初始化渲染地图
   renderMap = (result) => {
     this.map = new AMap.Map('orderDetailMap', {

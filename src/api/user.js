@@ -10,3 +10,22 @@ export const getEmployeeList = (params) => {
   })
 }
 
+
+//编辑修改员工信息
+export const editEmployee = (data) => {
+  return Axios.ajax({
+    method: 'post',
+    url: user.editEmployee,
+    data
+  })
+}
+
+//新增员工信息
+export const addEmployee = (data) => {
+  return Axios.ajax({
+    method: 'post',
+    url: user.addEmployee,
+    data
+  })
+}
+

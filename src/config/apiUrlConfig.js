@@ -12,8 +12,12 @@ export const table = {
   fixedColumnList: '/table/high/getFixedColumnList',  //固定头部表格数据
 }
 
-
-
 export const user = {
-  employeeList: '/employee_List'    //订单列表
+  employeeList: '/employee/getList',    //获取员工列表
+  editEmployee: '/employee/editEmployee',    //编辑修改员工信息
+  addEmployee: '/employee/addEmployee',    //新增员工信息
+}
+
+export const bikeMap = {
+  bikeList: '/bike_list'    //获取单车数据
 }

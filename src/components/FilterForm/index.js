@@ -4,27 +4,27 @@ import Utils from '../../utils/utils';
 const FormItem = Form.Item;
 const Option = Select.Option;
 
-class FilterForm extends React.Component{
+class FilterForm extends React.Component {
 
   handleSubmit = () => {
     const fieldsValues = this.props.form.getFieldsValue();
     this.props.handleSubmit(fieldsValues);
   }
-  
+
   getInitList = () => {
     let formList = this.props.formList;
     let formItem = [];
-    if(formList && formList.length > 1){
+    if (formList && formList.length > 1) {
       const { getFieldDecorator } = this.props.form;
       formList.forEach(item => {
         const { type, label, width, placeholder, list, field, initialValue } = item;
-        if(type === 'SELECT'){
+        if (type === 'SELECT') {
           const SELECT = <FormItem label={label} key={field}>
             {
               getFieldDecorator(field, {
                 initialValue: initialValue
               })(
-                <Select style={{width:width}}>
+                <Select style={{ width: width }}>
                   <Option value="0" key="all_key">全部</Option>
                   {
                     Utils.getOptionList(list)
@@ -34,18 +34,18 @@ class FilterForm extends React.Component{
             }
           </FormItem>;
           formItem.push(SELECT);
-        }else if(type === 'INPUT'){
+        } else if (type === 'INPUT') {
           const INPUT = <FormItem label={label} key={field}>
             {
               getFieldDecorator(field, {
                 initialValue: initialValue
               })(
-                <Input placeholder={placeholder}  style={{width:width}} />
+                <Input placeholder={placeholder} style={{ width: width }} />
               )
             }
           </FormItem>;
           formItem.push(INPUT);
-        }else if(type === 'CHECKBOX'){
+        } else if (type === 'CHECKBOX') {
           const CHECKBOX = <FormItem key={field}>
             {
               getFieldDecorator(field, {
@@ -57,19 +57,19 @@ class FilterForm extends React.Component{
             }
           </FormItem>;
           formItem.push(CHECKBOX);
-        }else if(type === 'TIME'){
+        } else if (type === 'TIME') {
           const START_TIME = <FormItem label='开始时间' key='start_time'>
             {
               getFieldDecorator('start_time')(
-                <DatePicker showTime format="YYYY-MM-DD HH:mm:ss" placeholder={placeholder}  style={{width:width}} />
+                <DatePicker showTime format="YYYY-MM-DD HH:mm:ss" placeholder={placeholder} style={{ width: width }} />
               )
             }
           </FormItem>;
           formItem.push(START_TIME);
-          const END_TIME = <FormItem label='~' colon={false}  key="end_time">
+          const END_TIME = <FormItem label='~' colon={false} key="end_time">
             {
               getFieldDecorator('end_time')(
-                <DatePicker showTime format="YYYY-MM-DD HH:mm:ss" placeholder={placeholder}  style={{width:width}} />
+                <DatePicker showTime format="YYYY-MM-DD HH:mm:ss" placeholder={placeholder} style={{ width: width }} />
               )
             }
           </FormItem>;
@@ -79,18 +79,21 @@ class FilterForm extends React.Component{
     }
     return formItem;
   }
-  render(){
+  render() {
     return (
       <Form layout="inline">
         {this.getInitList()}
         <FormItem>
           <Button type="primary" onClick={this.handleSubmit}>查询</Button>
         </FormItem>
-        <FormItem>
-          <Button onClick={() => {
-            this.props.form.resetFields();
-          }}>重置</Button>
-        </FormItem>
+        {
+          this.props.hideReset ? '' :
+            <FormItem>
+              <Button onClick={() => {
+                this.props.form.resetFields();
+              }}>重置</Button>
+            </FormItem>
+        }
       </Form>
     )
   }

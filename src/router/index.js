@@ -23,6 +23,7 @@ import City from '../views/City';
 import Order from '../views/Order';
 import OrderDetail from '../views/Order/Detail';
 import User from '../views/User';
+import BikeMap from '../views/BikeMap';
 
 
 export default class Routers extends Component {
@@ -51,6 +52,7 @@ export default class Routers extends Component {
                   <Route path={`${match.path}/city`} component={City} />
                   <Route path={`${match.path}/order`} component={Order}/>
                   <Route path={`${match.path}/user`} component={User}/>
+                  <Route path={`${match.path}/bikeMap`} component={BikeMap}/>
                   <Route component={NotFound} />
                 </Switch>
               </Admin>
