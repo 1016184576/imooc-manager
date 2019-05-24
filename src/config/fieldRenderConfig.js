@@ -61,3 +61,14 @@ export const orderStatusConfig = {
 }
 
 
+//角色名称配置
+export const roleNameConfig = {
+  "1": "系统管理员",
+  "2": "总经理",
+  "3": "部门主管",
+  "4": "客服专员",
+  "5": "销售专员",
+  "6": "财务专员",
+  "7": "研发工程师"
+}
+

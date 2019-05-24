@@ -29,3 +29,12 @@ export const addEmployee = (data) => {
   })
 }
 
+//用户登陆
+export const login = (params) => {
+  return Axios.ajax({
+    method: 'get',
+    url: user.login,
+    params
+  })
+}
+

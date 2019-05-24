@@ -1,2 +1,68 @@
 @import "../../less/default.less";
 
+.login-warp{
+  background: url(https://media.xiaohuali.com/ebike-fc/login/banner.jpg) no-repeat center;
+  background-size: cover;
+  .header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    line-height: 80px;
+    color: #ffffff;
+    font-size: 18px;
+    padding-left: 100px;
+    background:rgba(21, 20, 13, 0.9);
+    img{
+      width: 40px;
+      height: 40px;
+      margin-right: 20px;
+    }
+  }
+  .login-content{
+    max-width: 960px;
+    height: calc(100vh);
+    min-height: 550px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    .word{
+      color: #ffffff;
+      font-size: 64px;
+      font-weight: 700;
+      flex: 7 1;
+    }
+    .login-box{
+      flex: 4 1;
+      background-color: #fff;
+      padding: 30px;
+      height: 400px;
+      max-width: 360px;
+      h2{
+        font-size: 40px;
+        text-align: center;
+        font-weight: 700;
+      }
+      .login-form{
+        padding-top: 20px;
+        .login-form-forgot{
+          float: right;
+        }
+        .login-form-button{
+          width: 100%;
+        }
+      }
+    }
+  }
+  .footer{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    line-height: 60px;
+    font-size: 12px;
+    background: rgba(21, 23, 20, 0.5);
+  }
+}

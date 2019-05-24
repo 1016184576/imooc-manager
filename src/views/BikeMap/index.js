@@ -68,7 +68,8 @@ export default class BikeMap extends React.Component {
       center:[116.333926,39.997245]
     });
     this.addMapControl();
-    this.drawBikeRoute(result.bike_list);
+    this.drawBikePoint(result.bike_list);
+    this.drawBikeRoute(result.route_list);
     this.dearServiceArea(result.service_list);
   }
 
@@ -80,16 +81,14 @@ export default class BikeMap extends React.Component {
       map.addControl(new AMap.Scale());
     })
   }
-
-  //绘制线路图
-  drawBikeRoute(positionList){
+  /*绘制线路图*/
+  drawBikeRoute(route_list){
     let map = this.map;
-    if(positionList.length){
+    if(route_list.length){
       let startPoint = '';
       let endPoint = '';
-      console.log(positionList)
       //起点坐标标记
-      startPoint = positionList[0].split(',');
+      startPoint = route_list[0].split(',');
       let startIcon = new AMap.Icon({
         size: new AMap.Size(36, 42),
         // 图标的取图地址
@@ -100,12 +99,12 @@ export default class BikeMap extends React.Component {
       let startMarker = new AMap.Marker({
         position: startPoint,
         icon: startIcon,
-        offset: new AMap.Pixel(-15, -40)
+        offset: new AMap.Pixel(-18, -42),
       });
 
       //终点坐标标记
-      let lastIndex = positionList.length - 1;
-      endPoint = positionList[lastIndex].split(',')  //new AMap.LngLat(positionList[lastIndex]);
+      let lastIndex = route_list.length - 1;
+      endPoint = route_list[lastIndex].split(',')  //new AMap.LngLat(route_list[lastIndex]);
       let endIcon = new AMap.Icon({
         size: new AMap.Size(36, 42),
         // 图标的取图地址
@@ -116,13 +115,14 @@ export default class BikeMap extends React.Component {
       let endMarker = new AMap.Marker({
         position: endPoint,
         icon: endIcon,
-        offset: new AMap.Pixel(-13, -40)
+        offset: new AMap.Pixel(-18, -42)
       });
       map.add([startMarker,endMarker]);
 
       //连接线路图
-      let trackPoint = positionList.map((item)=>{
-        return new AMap.LngLat(item.lon,item.lat);
+      let trackPoint = route_list.map((item)=>{
+        let arr = item.split(',');
+        return new AMap.LngLat(arr[0],arr[1]);
       });
       
       let polyline = new AMap.Polyline({
@@ -135,8 +135,6 @@ export default class BikeMap extends React.Component {
         strokeWeight: 3,
         // 折线样式还支持 'dashed'
         strokeStyle: "solid",
-        // strokeStyle是dashed时有效
-        strokeDasharray: [10, 5],
         lineJoin: 'round',
         lineCap: 'round',
         zIndex: 50,
@@ -145,6 +143,27 @@ export default class BikeMap extends React.Component {
       //缩放地图到合适的视野级别
       map.setFitView([ polyline ])
       map.setCenter(endPoint);
+    }
+  }
+  drawBikePoint(bike_list){
+    let map = this.map;
+    if(bike_list.length){
+      let pointIcon = new AMap.Icon({
+        size: new AMap.Size(36, 42),
+        // 图标的取图地址
+        image: '/assets/bike.jpg',
+        // 图标所用图片大小
+        imageSize: new AMap.Size(36, 42),
+      })
+      let bikePointArray = bike_list.map((item)=>{
+        let arr = item.split(',');
+        return new AMap.Marker({
+          position: arr,
+          icon: pointIcon,
+          offset: new AMap.Pixel(-18, -42)
+        });
+      });
+      map.add(bikePointArray)
     }
   }
   //绘制服务区

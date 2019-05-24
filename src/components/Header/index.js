@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import { Row, Col } from "antd";
 import Utils from '../../utils/utils';
 import Axios from '../../axios/axios';
+import { connect } from 'react-redux';
 import "./index.less";
 
-export default class Header extends Component {
+class Header extends Component {
   
   constructor(props){
     super(props)
@@ -68,7 +69,7 @@ export default class Header extends Component {
         {
           menuType ? '' : <Row className="breadcrumb">
           <Col span={4} className="breadcrumb-title">
-            <span>首页</span>
+            <span>{this.props.menuName}</span>
           </Col>
           <Col className="weather">
             <span className="date">{this.state.sysTime}</span>
@@ -84,3 +85,8 @@ export default class Header extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  menuName: state.switchMenuName
+})
+
+export default connect(mapStateToProps)(Header)

@@ -267,8 +267,6 @@ export default class User extends React.Component {
             删除员工
           </Button>
         </Card>
-        <a id="id_quhuainit" style={{ display: "block", position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)" }} href="/">
-        </a>
         <div className="contend-warp">
           <Table
             columns={columns}

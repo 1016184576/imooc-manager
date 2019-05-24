@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import menuList from "../../config/menuConfig";
+import { switchMenuAction } from '../../redux/action'
+import { connect } from 'react-redux';
 import { Menu } from 'antd';
 import './index.less';
 
 const { SubMenu } = Menu;
-export default class NavLeft extends Component {
+class NavLeft extends Component {
   constructor(props){
     super(props);
     this.state = {
@@ -14,10 +16,44 @@ export default class NavLeft extends Component {
   } 
   componentWillMount(){
     let nodeTreeList = this.rednerMenu(menuList);
+    let initMenu = this.getInitMenu(menuList);
+    if(!initMenu) {
+      initMenu =  {
+        title: '首页',
+        key: '/home'
+      }
+    }
+    const { dispatch } = this.props;
+    dispatch(switchMenuAction(initMenu.title))
     this.setState({
-      nodeTreeList
+      nodeTreeList,
+      selectedKey: initMenu.key
     })
   }
+
+  getInitMenu = (data) => {
+    let initMenu = null;
+    data.map(item=>{
+      if(item.key !== window.location.pathname){
+        if(item.children){
+          this.getInitMenu(item.children);
+        }
+      }else{
+        initMenu = item;
+      }
+      return item;
+    })
+    return initMenu
+  }
+
+  handelSelect=({item, key})=>{
+    const { dispatch } = this.props;
+    dispatch(switchMenuAction(item.props.title))
+    this.setState({
+      selectedKey: key
+    })
+  }
+
   //递归渲染菜单
   rednerMenu = (menuData) => {
     return menuData.map(item => {
@@ -30,8 +66,8 @@ export default class NavLeft extends Component {
         )
       }
       return (
-        <Menu.Item key={item.key}>
-          <Link to={item.key}>{item.title}</Link>
+        <Menu.Item key={item.key} title={item.title}>
+          <Link to={item.key} >{item.title}</Link>
         </Menu.Item>
       )
     })
@@ -47,7 +83,8 @@ export default class NavLeft extends Component {
         <Menu 
           mode="inline"
           theme="dark"
-          defaultOpenKeys={[menuList[0].key]}
+          selectedKeys={[this.state.selectedKey]}
+          onSelect={this.handelSelect}
         >
             { this.state.nodeTreeList }
         </Menu>
@@ -55,3 +92,5 @@ export default class NavLeft extends Component {
     )
   }
 }
+
+export default connect()(NavLeft)
