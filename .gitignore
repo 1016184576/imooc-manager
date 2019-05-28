@@ -6,4 +6,5 @@ yarn-error.log*
 .idea
 .Archive/
 .vscode/
+build/
 dist/

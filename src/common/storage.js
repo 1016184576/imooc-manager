@@ -30,7 +30,7 @@ function detect(type) {
  */
 class storage {
 
-  constructor(type = 'localStorage', prefix = '__storage__') {
+  constructor(type = 'localStorage', prefix = '__IMOOC__') {
     this.prefix = prefix;
     this.type = type;
     this.enabled = detect(type);

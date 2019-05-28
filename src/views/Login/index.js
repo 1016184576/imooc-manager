@@ -1,21 +1,26 @@
+import "./index.less";
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
 import { login } from '../../api/user' ;
-import "./index.less";
+import storage from '../../common/storage';
+
 
 class Login extends React.Component {
-
+  state = {
+    redirectToReferrer: false
+  }
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFields((err, userInfo) => {
       if (!err) {
         login(userInfo).then(({ data }) => {
           if(data){
-            console.log(this.props.location.state.from.pathname)
-            localStorage.setItem('user',JSON.stringify(userInfo))
-            this.props.history.push({
-              pathname: this.props.location.state.from.pathname || '/home'
-            })
+            storage.set('user',JSON.stringify(userInfo))
+            console.log(this.props.location)
+            this.setState({ 
+              redirectToReferrer: true 
+            });
           }
         })
       }
@@ -24,6 +29,9 @@ class Login extends React.Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
+    let { from } = this.props.location.state || { from: { pathname: "/" } };
+    let { redirectToReferrer } = this.state;
+    if (redirectToReferrer) return <Redirect to={from} />;
     return (
       <div className="login-warp">
         <div className="header">
@@ -79,7 +87,7 @@ class Login extends React.Component {
                     initialValue: true,
                   })(<Checkbox>记住密码</Checkbox>)
                 }
-                <a className="login-form-forgot" href="javascript:void(0);">
+                <a className="login-form-forgot" href="/login">
                   忘记密码
                 </a>
                 <Button type="primary" htmlType="submit" className="login-form-button">

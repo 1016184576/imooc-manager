@@ -29,6 +29,7 @@ import Pie from "../views/Charts/Pie";
 import Line from "../views/Charts/Line";
 import Rich from "../views/Rich";
 import Permission from "../views/Permission";
+import AuthRoute from './PrivateRoute'
 
 
 export default class Routers extends Component {
@@ -38,15 +39,15 @@ export default class Routers extends Component {
         <App>
           <Switch>
             <Route path="/login" component={Login} />
-            <AuthRoute path="/common"  render={({match})=>
+            <Route path="/common" render={({ match }) =>
               <Common>
                 <Switch>
-                  <Route path={`${match.path}/order/detail/:id`} component={OrderDetail} />
+                  <AuthRoute path={`${match.path}/order/detail/:id`} component={OrderDetail} />
                   <Route component={NotFound} />
                 </Switch>
               </Common>
             } />
-            <Route path="/" render={()=>
+            <Route path="/" render={() =>
               <Admin>
                 <Switch>
                   <AuthRoute path='/home' component={Home} />
@@ -63,14 +64,14 @@ export default class Routers extends Component {
                   <AuthRoute path='/table/basic' component={BasicTable} />
                   <AuthRoute path='/table/high' component={HighTable} />
                   <AuthRoute path='/city' component={City} />
-                  <AuthRoute path='/order' component={Order}/>
-                  <AuthRoute path='/user' component={User}/>
-                  <AuthRoute path='/bikeMap' component={BikeMap}/>
-                  <AuthRoute path='/charts/bar' component={Bar}/>
-                  <AuthRoute path='/charts/pie' component={Pie}/>
-                  <AuthRoute path='/charts/line' component={Line}/>
-                  <AuthRoute path='/rich' component={Rich}/>
-                  <AuthRoute path='/permission' component={Permission}/>
+                  <AuthRoute path='/order' component={Order} />
+                  <AuthRoute path='/user' component={User} />
+                  <AuthRoute path='/bikeMap' component={BikeMap} />
+                  <AuthRoute path='/charts/bar' component={Bar} />
+                  <AuthRoute path='/charts/pie' component={Pie} />
+                  <AuthRoute path='/charts/line' component={Line} />
+                  <AuthRoute path='/rich' component={Rich} />
+                  <AuthRoute path='/permission' component={Permission} />
                   <Redirect to="/home" />
                   <Route component={NotFound} />
                 </Switch>
@@ -82,26 +83,4 @@ export default class Routers extends Component {
       </Router>
     )
   }
-}
-
-let isAuthenticated = localStorage.getItem('user');
-
-function AuthRoute({ component: Component, ...rest }) {
-  return (
-    <Route
-      {...rest}
-      render={props =>
-        isAuthenticated ? (
-          <Component {...props} />
-        ) : (
-          <Redirect
-            to={{
-              pathname: "/login",
-              state: { from: props.location }
-            }}
-          />
-        )
-      }
-    />
-  );
 }
